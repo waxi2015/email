@@ -64,8 +64,14 @@ class Email {
 			if (!empty($email) && self::canSend($email)) {
 				if (env('APP_ENV') != 'local' || (env('APP_ENV') == 'local' && $i < 1)) {
 
+					$template = 'emails.layout';
+
+					if (!empty($layout) && $layout != 'default') {
+						$template = 'emails.layout-' . $layout;
+					}
+
 					try {
-						\Mail::send('emails.layout-' . $layout, ['content' => $content, 'to' => ['name' => $name, 'email' => $email]], function ($message) use ($subject, $name, $email, $content) {
+						\Mail::send($template, ['content' => $content, 'to' => ['name' => $name, 'email' => $email]], function ($message) use ($subject, $name, $email, $content) {
 			
 						    $message->subject($subject);
 							$message->to($email, $name);
@@ -177,10 +183,6 @@ class Email {
 		
 		foreach ($as as $a) {
 			$color = '#24a7d0';
-
-			if ($this->params['layout'] == 'stock') {
-				$color = '#d2145a';
-			}
 
 			$a->setAttribute('style', "color: $color !important");
 			$txt = $a->nodeValue;
