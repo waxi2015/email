@@ -17,6 +17,7 @@ class EmailServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/migrations' => 'database/migrations',
+            __DIR__.'/config/mail.php' => 'config/mail.php',
         ]);
     }
 

@@ -129,7 +129,7 @@ class Email {
 			$form->feedback = [
 				'true' => [
 					'valid' => true,
-					'message' => 'Email sent',
+					'message' => 'cms.emails.send_success',
 					'params' => [
 						'emails' => $emails,
 					],
@@ -139,7 +139,7 @@ class Email {
 		} else {
 			if (!isset($form->feedback['true'])) {
 				$form->feedback['true'] = [
-					'message' => 'Email sent'
+					'message' => 'cms.emails.send_success'
 				];
 			}
 
